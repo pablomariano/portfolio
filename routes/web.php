@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/* este es el código original
 Route::get('/', function () {
     return view('welcome');
 });
+
+*/
+
+Route::view('/', 'welcome');
