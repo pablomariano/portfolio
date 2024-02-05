@@ -17,7 +17,7 @@ use PharIo\Manifest\Email;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
+    return view('welcome');
 
     // ========================================
     //    Select
@@ -57,8 +57,8 @@ Route::get('/', function () {
     //     'email'=> 'Mariano4@correo.com',
     //     'password'=> 'pawword',
     // ]);
-    $user = User::find(6);
-    dd($user->name);
+    // $user = User::find(6);
+    // dd($user->name);
     
     // ========================================
     //    Update
@@ -89,6 +89,8 @@ Route::get('/', function () {
     // $users = User::find(8)->delete();
     // $user = User::truncate();
     // dd($user);
+
+
     
 
 
