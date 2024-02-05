@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use PharIo\Manifest\Email;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,36 +19,50 @@ use App\Models\User;
 Route::get('/', function () {
     // return view('welcome');
 
-    //  -- SELECT --
-    //  $users = DB::select("select * from users");
-    //  dd($users);
-    // $user = DB::table('users')->where('id', 1)->first();
+    // ========================================
+    //    Select
+    // ========================================
+    // $users = DB::select("select * from users"); //DB FACADE
+    // dd($users);
+    // $user = DB::table('users')->where('id', 1)->first(); //QUERY BUILDER
     // $user = DB::table('users')->find(1);
-    
+    // $users = DB::table('users')->get();
     // $users = DB::table('users')->where('id', $user->id)->first();
     // dd($users);
-
-    // $users = User::where('id', 1)->first();
+    // $users = User::where('id', 1)->first(); //ELOQUENT
     // dd($users);
     // -- Eloquent --
     // $user = User::where('id', 6)->first();
+    // #user = User::find(6);
     // dd($user);
 
-    //  -- INSERT --
-    // create new user
+    // ========================================
+    //  Insert
+    // ========================================
+    // **** DB Facade ****
     // $user = DB::insert('insert into users(name, email, password) values (?,?,?)',[
-    //     'Andres',
-    //     'pabloandresmariano8@gmail.com',
-    //     'clave',
+    //     'Pablo',
+    //     'pablo@correo.com',
+    //     'clavess',
     // ]);
+    // // *** Query Builder ***
+    // $user = DB::table('users')->insert([
+    //     'name'=> 'Andrés',
+    //     'email'=> 'andres@correo.com',
+    //     'password'=> 'clavex',
+    // ]);
+    // // *** Eloquent ***
     // $user = User::create([
-    //     'name'=> 'Wacolco',
-    //     'email'=> 'wacoldo@massmail.com',
-    //     'password'=> 'elpass',
+    //     'name'=> 'Mariano',
+    //     'email'=> 'Mariano4@correo.com',
+    //     'password'=> 'pawword',
     // ]);
-    // dd($users);
+    $user = User::find(6);
+    dd($user->name);
     
-    //  -- UPDATE --
+    // ========================================
+    //    Update
+    // ========================================
     // $user = DB::update("update users set email='pablo@lol.com' where id=5");
     //     $user = DB::update("update users set email=? where id=?",[
     //         'loli@lolsi.com',
@@ -64,17 +79,18 @@ Route::get('/', function () {
     // $user = User::find([1 , 8]);
     // dd($user);
 
-
-
-    // -- DELETE --
-    // $user = DB::delete("delete from users where id=3");
+    // ========================================
+    //    Delete
+    // ========================================
+    // $user = DB::delete("delete from users where id=3");    
     // $user = DB::table('users')->where('id', 5)->delete();
-    // dd($user);
     // -- Eloquent --
     // $user = User::find(6)->delete();
     // $users = User::find(8)->delete();
-    // $users = DB::select("select * from users");
-    // dd($users);
+    // $user = User::truncate();
+    // dd($user);
+    
+
 
 
 
