@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Profile\AvatarController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -17,7 +18,7 @@ use PharIo\Manifest\Email;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+//    return view('welcome');
 
     // ========================================
     //    Select
@@ -78,6 +79,12 @@ Route::get('/', function () {
     // ]);
     // $user = User::find([1 , 8]);
     // dd($user);
+    // $user = User::find(8)->update([
+    //     'avatar'=> 'sfggfeS',
+    // ]);
+    // // $user = User::find(8);
+    // dd($user);
+return view('welcome');
 
     // ========================================
     //    Delete
@@ -89,6 +96,8 @@ Route::get('/', function () {
     // $users = User::find(8)->delete();
     // $user = User::truncate();
     // dd($user);
+
+
 
 
     
@@ -108,6 +117,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/profile/avatar', [AvatarController::class,'update'])->name('profile.avatar');
 });
 
 require __DIR__.'/auth.php';
