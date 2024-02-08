@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class AvatarController extends Controller
 {
-    //
+    public function update(){
+        return back()->with('message', 'Avatar is changed');
+    }
 }

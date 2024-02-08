@@ -8,6 +8,13 @@
             Add or update user avatar
         </p>
     </header>
+
+    @if (session('message'))
+        <div class="text-red-500">
+            {{  session('message')   }}
+        </div>
+    @endif
+
     <form method="post" action="{{ route('profile.avatar') }}">
         @method('patch')
         @csrf
