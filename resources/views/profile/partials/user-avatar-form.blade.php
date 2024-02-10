@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <form method="post" action="{{ route('profile.avatar') }}">
+    <form method="post" action="{{ route('profile.avatar') }}" enctype="multipart/form-data">
         @method('patch')
         @csrf
         <!-- <input type="hidden" name="_method" value="patch"> -->
@@ -24,7 +24,7 @@
 
         <div>
             <x-input-label for="name" :value="__('Avatar')" />
-            <x-text-input id="avatar" name="avatar" type="file" class="mt-1 block w-full" :value="old('avatar', $user->avatar)" required autofocus autocomplete="name" />
+            <x-text-input id="avatar" name="avatar" type="file" class="mt-1 block w-full" :value="old('avatar', $user->avatar)" autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
         </div>
 
