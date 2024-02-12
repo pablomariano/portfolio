@@ -39,11 +39,14 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::get('/openai', function (){
-    $result = OpenAI::completions()->create([
-        'model'=> 'gpt-3.5-turbo-instruct',
-        'prompt'=> 'PHP is',
+    $result = OpenAI::images()->create([
+        'model' => 'dall-e-2',
+        'prompt' => 'A cute baby sea otter',
+        'n' => 1,
+        'size' => '256x256',
+        'response_format' => 'url',
     ]);
-    
-    echo $result['choices'][0]['text'];
+
+    return response(['url' => $result->data[0]->url]);
 
 });
