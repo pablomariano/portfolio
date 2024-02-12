@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use PharIo\Manifest\Email;
+use OpenAI\Laravel\Facades\OpenAI; 
 
 /*
 |--------------------------------------------------------------------------
@@ -18,94 +19,9 @@ use PharIo\Manifest\Email;
 */
 
 Route::get('/', function () {
-//    return view('welcome');
-
-    // ========================================
-    //    Select
-    // ========================================
-    // $users = DB::select("select * from users"); //DB FACADE
-    // dd($users);
-    // $user = DB::table('users')->where('id', 1)->first(); //QUERY BUILDER
-    // $user = DB::table('users')->find(1);
-    // $users = DB::table('users')->get();
-    // $users = DB::table('users')->where('id', $user->id)->first();
-    // dd($users);
-    // $users = User::where('id', 1)->first(); //ELOQUENT
-    // dd($users);
-    // -- Eloquent --
-    // $user = User::where('id', 6)->first();
-    // #user = User::find(6);
-    // dd($user);
-
-    // ========================================
-    //  Insert
-    // ========================================
-    // **** DB Facade ****
-    // $user = DB::insert('insert into users(name, email, password) values (?,?,?)',[
-    //     'Pablo',
-    //     'pablo@correo.com',
-    //     'clavess',
-    // ]);
-    // // *** Query Builder ***
-    // $user = DB::table('users')->insert([
-    //     'name'=> 'Andrés',
-    //     'email'=> 'andres@correo.com',
-    //     'password'=> 'clavex',
-    // ]);
-    // // *** Eloquent ***
-    // $user = User::create([
-    //     'name'=> 'Mariano',
-    //     'email'=> 'Mariano4@correo.com',
-    //     'password'=> 'pawword',
-    // ]);
-    // $user = User::find(6);
-    // dd($user->name);
-    
-    // ========================================
-    //    Update
-    // ========================================
-    // $user = DB::update("update users set email='pablo@lol.com' where id=5");
-    //     $user = DB::update("update users set email=? where id=?",[
-    //         'loli@lolsi.com',
-    //         5,
-    //     ]);
-    //  dd($user);
-    // -- Query builder --
-    // $user = DB::table('users')->where('id', 5)->update(['email' => 'pablo@lolo.com']);
-    // dd($user);
-    // -- Eloquent --
-    // $user = User::where('id', 6)->update([
-    //     'email' => 'chango@chan.com',
-    // ]);
-    // $user = User::find([1 , 8]);
-    // dd($user);
-    // $user = User::find(8)->update([
-    //     'avatar'=> 'sfggfeS',
-    // ]);
-    // // $user = User::find(8);
-    // dd($user);
-return view('welcome');
-
-    // ========================================
-    //    Delete
-    // ========================================
-    // $user = DB::delete("delete from users where id=3");    
-    // $user = DB::table('users')->where('id', 5)->delete();
-    // -- Eloquent --
-    // $user = User::find(6)->delete();
-    // $users = User::find(8)->delete();
-    // $user = User::truncate();
-    // dd($user);
+    return view('welcome');
 
 
-
-
-    
-
-
-
-
-        
 
 });
 
@@ -121,3 +37,13 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/openai', function (){
+    $result = OpenAI::completions()->create([
+        'model'=> 'gpt-3.5-turbo-instruct',
+        'prompt'=> 'PHP is',
+    ]);
+    
+    echo $result['choices'][0]['text'];
+
+});

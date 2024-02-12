@@ -17,8 +17,8 @@ class AvatarController extends Controller
             Storage::disk('public')->delete($oldAvatar);
         }
         
-        // $path = $request->file('avatar')->store('avatars','public');
         auth()->user()->update(['avatar' => $path]);
+        // $path = $request->file('avatar')->store('avatars','public');
         //auth()->user()->update(['avatar' => 'test']);
         
         return redirect()->route('profile.edit')->with('message','Avatar is updated');
