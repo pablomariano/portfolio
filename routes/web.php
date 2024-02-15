@@ -4,6 +4,7 @@ use App\Http\Controllers\Profile\AvatarController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use Laravel\Socialite\Facades\Socialite;
 use PharIo\Manifest\Email;
 use OpenAI\Laravel\Facades\OpenAI; 
 
@@ -21,8 +22,6 @@ use OpenAI\Laravel\Facades\OpenAI;
 Route::get('/', function () {
     return view('welcome');
 
-
-
 });
 
 Route::get('/dashboard', function () {
@@ -39,15 +38,18 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-// Route::get('/openai', function (){
-//     $result = OpenAI::images()->create([
-//         'model' => 'dall-e-2',
-//         'prompt' => 'A cute baby sea otter',
-//         'n' => 1,
-//         'size' => '256x256',
-//         'response_format' => 'url',
-//     ]);
+Route::post('/auth/redirect', function () {
+    return Socialite::driver('github')->redirect();
+})->name('login.github');
 
-//     return response(['url' => $result->data[0]->url]);
+Route::get('/auth/callback', function () {
+    $user = Socialite::driver('github')->user();
+    $user = User::firstOrCreate(['email' => $user->email], [
+        'name' => $user->name,
+        'password' => 'password',
+    ]);
 
-// });
+    Auth::login($user);
+    return redirect('/dashboard');
+    
+});
