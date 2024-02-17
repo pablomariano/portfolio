@@ -50,7 +50,7 @@ class TicketController extends Controller
         } 
        
 
-        return response()->redirect(route('ticket.index'));
+        return redirect(route('ticket.index'));
     }
 
     /**
@@ -82,6 +82,7 @@ class TicketController extends Controller
      */
     public function destroy(Ticket $ticket)
     {
-        //
+        $ticket->delete();
+        return redirect(route('ticket.index'));
     }
 }
