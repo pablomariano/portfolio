@@ -46,7 +46,7 @@ class TicketController extends Controller
             $filename = Str::random(25);
             $path = "attachments/$filename.$ext";
             Storage::disk('public')->put($path, $contents);
-            $ticket->update(['attachent' => $path]);
+            $ticket->update(['attachment' => $path]);
         } 
        
 
@@ -58,7 +58,7 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        return view('ticket.show');
+        return view('ticket.show', compact('ticket'));
     }
 
     /**
