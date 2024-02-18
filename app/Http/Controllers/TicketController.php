@@ -69,16 +69,16 @@ class TicketController extends Controller
      */
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
-        $ticket->update(['title' => $request->title, 'description' => $request->description]);
+        
+        $ticket->update($request->except('attachment'));
 
-        if ($request->file('attachment'))
-        {
+        if ($request->file('attachment')) {
             Storage::disk('public')->delete($ticket->attachment);
             $this->storeAttachment($request, $ticket);
         }
-        else{
-            $this->storeAttachment($request, $ticket);
-        } 
+        // else{
+        //     $this->storeAttachment($request, $ticket);
+        // } 
 
         return redirect(route('ticket.index'));
     }
@@ -94,10 +94,10 @@ class TicketController extends Controller
 
     protected function storeAttachment($request, $ticket)
     {
-        $ext = $request->file('attachment')->extension();
+        $ext      = $request->file('attachment')->extension();
         $contents = file_get_contents($request->file('attachment'));
         $filename = Str::random(25);
-        $path = "attachments/$filename.$ext";
+        $path     = "attachments/$filename.$ext";
         Storage::disk('public')->put($path, $contents);
         $ticket->update(['attachment' => $path]);
     }

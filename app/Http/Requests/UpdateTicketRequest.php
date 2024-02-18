@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
-
+use illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateTicketRequest extends FormRequest
@@ -14,16 +14,12 @@ class UpdateTicketRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
-            'description'=> ['required', 'string'],
+            'title' => ['string', 'max:255'],
+            'description'=> ['string'],
+            'status'=> ['string'],
             'attachment'=> ['sometimes', 'file', 'mimes:jpg,jpeg,png,pdf'],
         ];
     }
