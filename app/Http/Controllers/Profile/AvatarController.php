@@ -33,7 +33,7 @@ class AvatarController extends Controller
 
         $result = OpenAI::images()->create([
             'model' => 'dall-e-2',
-            'prompt' => 'A cute baby sea otter',
+            'prompt' => 'A baby cat with wings',
             'n' => 1,
             'size' => '256x256',
             'response_format' => 'url',
@@ -53,6 +53,5 @@ class AvatarController extends Controller
         auth()->user()->update(['avatar' => "avatars/$filename.jpg"]);
         return redirect(route("profile.edit"))->with("message","Avatar is updated");
 
-    
     }
 }

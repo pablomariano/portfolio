@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
+
 use illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -18,9 +19,9 @@ class UpdateTicketRequest extends FormRequest
     {
         return [
             'title' => ['string', 'max:255'],
-            'description'=> ['string'],
-            'status'=> ['string'],
-            'attachment'=> ['sometimes', 'file', 'mimes:jpg,jpeg,png,pdf'],
+            'description' => ['string'],
+            'status' => ['string'],
+            'attachment' => ['sometimes', 'file', 'mimes:jpg,jpeg,png,pdf'],
         ];
     }
 }
