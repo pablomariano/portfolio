@@ -9,7 +9,6 @@
                     <a href="{{ '/storage/' . $ticket->attachment }}" target="_blank">Attachment</a>
                 @endif
             </div>
-
             <div class="flex justify-between">
                 <div class="flex">
                     <a href="{{ route('ticket.edit', $ticket->id) }}">
